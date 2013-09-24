@@ -73,17 +73,21 @@
 </head>
 
 <body <?php body_class(); ?> id="<?php echo  strtolower(str_replace(' ','-',get_the_title())); ?>">
-		<div id="header-top" class="container">
+		<!-- <div id="header-top" class="container">
 			<div class="mid-cont"></div>
-		</div>
+		</div> -->
 		<div id="header" class="container">
 			<div class="mid-cont">
-				<a id="logo" href="/"></a>
-				<div id="nav">
-						<?php wp_nav_menu( array( 'theme_location' => 'primary' ) ); ?>
+				<div id="logo"><a  href="/"></a></div>
+				<div class="header-cont">
+					<div id="headline">your guide to the fly lifestyle</div>
+				 	<?php get_search_form(); ?> 
+					<div id="nav">
+							<?php wp_nav_menu( array( 'theme_location' => 'primary' ) ); ?>
+					</div>
 				</div>
 			</div>
 		</div>
 		<div id="main-wrap" class="container">
-			<div class="mid-cont">
+			<!-- <div class="mid-cont"> -->
 

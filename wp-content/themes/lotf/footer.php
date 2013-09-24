@@ -10,10 +10,19 @@
  */
 ?>
 
-			</div>
+			<!-- </div> -->
 		</div>
 		<div id="footer" class="container">
-			<div class="mid-cont"></div>
+			<div class="mid-cont">
+				<div id="footer-seal"></div>
+				<div id="copyright">&copy; 2013 Life on the fly,  all rights reserved</div>
+				<div id="social-cont">
+					<span>SOCIAL</span>
+					<a id="facebook" class="social" target="_blank" href="#"></a>
+					<a id="twitter" class="social" target="_blank" href="#"></a>
+					<a id="instagram" class="social" target="_blank" href="#"></a>
+				</div>
+			</div>
 		</div>
 <?php wp_footer(); ?>
 
