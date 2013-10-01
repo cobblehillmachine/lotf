@@ -79,11 +79,6 @@ function twentyeleven_setup() {
 	 */
 	load_theme_textdomain( 'twentyeleven', get_template_directory() . '/languages' );
 
-	// This theme styles the visual editor with editor-style.css to match the theme style.
-	add_editor_style();
-
-	// Load up our theme options page and related code.
-	require( get_template_directory() . '/inc/theme-options.php' );
 
 	// Grab Twenty Eleven's Ephemera widget.
 	require( get_template_directory() . '/inc/widgets.php' );
@@ -94,237 +89,13 @@ function twentyeleven_setup() {
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menu( 'primary', __( 'Primary Menu', 'twentyeleven' ) );
 
-	// Add support for a variety of post formats
-	add_theme_support( 'post-formats', array( 'aside', 'link', 'gallery', 'status', 'quote', 'image' ) );
-
-	$theme_options = twentyeleven_get_theme_options();
-	if ( 'dark' == $theme_options['color_scheme'] )
-		$default_background_color = '1d1d1d';
-	else
-		$default_background_color = 'e2e2e2';
-
-	// Add support for custom backgrounds.
-	add_theme_support( 'custom-background', array(
-		// Let WordPress know what our default background color is.
-		// This is dependent on our current color scheme.
-		'default-color' => $default_background_color,
-	) );
 
 	// This theme uses Featured Images (also known as post thumbnails) for per-post/per-page Custom Header images
 	add_theme_support( 'post-thumbnails' );
 
-	// Add support for custom headers.
-	$custom_header_support = array(
-		// The default header text color.
-		'default-text-color' => '000',
-		// The height and width of our custom header.
-		'width' => apply_filters( 'twentyeleven_header_image_width', 1000 ),
-		'height' => apply_filters( 'twentyeleven_header_image_height', 288 ),
-		// Support flexible heights.
-		'flex-height' => true,
-		// Random image rotation by default.
-		'random-default' => true,
-		// Callback for styling the header.
-		'wp-head-callback' => 'twentyeleven_header_style',
-		// Callback for styling the header preview in the admin.
-		'admin-head-callback' => 'twentyeleven_admin_header_style',
-		// Callback used to display the header preview in the admin.
-		'admin-preview-callback' => 'twentyeleven_admin_header_image',
-	);
-
-	add_theme_support( 'custom-header', $custom_header_support );
-
-	if ( ! function_exists( 'get_custom_header' ) ) {
-		// This is all for compatibility with versions of WordPress prior to 3.4.
-		define( 'HEADER_TEXTCOLOR', $custom_header_support['default-text-color'] );
-		define( 'HEADER_IMAGE', '' );
-		define( 'HEADER_IMAGE_WIDTH', $custom_header_support['width'] );
-		define( 'HEADER_IMAGE_HEIGHT', $custom_header_support['height'] );
-		add_custom_image_header( $custom_header_support['wp-head-callback'], $custom_header_support['admin-head-callback'], $custom_header_support['admin-preview-callback'] );
-		add_custom_background();
-	}
-
-	// We'll be using post thumbnails for custom header images on posts and pages.
-	// We want them to be the size of the header image that we just defined
-	// Larger images will be auto-cropped to fit, smaller ones will be ignored. See header.php.
-	set_post_thumbnail_size( $custom_header_support['width'], $custom_header_support['height'], true );
-
-	// Add Twenty Eleven's custom image sizes.
-	// Used for large feature (header) images.
-	add_image_size( 'large-feature', $custom_header_support['width'], $custom_header_support['height'], true );
-	// Used for featured posts if a large-feature doesn't exist.
-	add_image_size( 'small-feature', 500, 300 );
-
-	// Default custom headers packaged with the theme. %s is a placeholder for the theme template directory URI.
-	register_default_headers( array(
-		'wheel' => array(
-			'url' => '%s/images/headers/wheel.jpg',
-			'thumbnail_url' => '%s/images/headers/wheel-thumbnail.jpg',
-			/* translators: header image description */
-			'description' => __( 'Wheel', 'twentyeleven' )
-		),
-		'shore' => array(
-			'url' => '%s/images/headers/shore.jpg',
-			'thumbnail_url' => '%s/images/headers/shore-thumbnail.jpg',
-			/* translators: header image description */
-			'description' => __( 'Shore', 'twentyeleven' )
-		),
-		'trolley' => array(
-			'url' => '%s/images/headers/trolley.jpg',
-			'thumbnail_url' => '%s/images/headers/trolley-thumbnail.jpg',
-			/* translators: header image description */
-			'description' => __( 'Trolley', 'twentyeleven' )
-		),
-		'pine-cone' => array(
-			'url' => '%s/images/headers/pine-cone.jpg',
-			'thumbnail_url' => '%s/images/headers/pine-cone-thumbnail.jpg',
-			/* translators: header image description */
-			'description' => __( 'Pine Cone', 'twentyeleven' )
-		),
-		'chessboard' => array(
-			'url' => '%s/images/headers/chessboard.jpg',
-			'thumbnail_url' => '%s/images/headers/chessboard-thumbnail.jpg',
-			/* translators: header image description */
-			'description' => __( 'Chessboard', 'twentyeleven' )
-		),
-		'lanterns' => array(
-			'url' => '%s/images/headers/lanterns.jpg',
-			'thumbnail_url' => '%s/images/headers/lanterns-thumbnail.jpg',
-			/* translators: header image description */
-			'description' => __( 'Lanterns', 'twentyeleven' )
-		),
-		'willow' => array(
-			'url' => '%s/images/headers/willow.jpg',
-			'thumbnail_url' => '%s/images/headers/willow-thumbnail.jpg',
-			/* translators: header image description */
-			'description' => __( 'Willow', 'twentyeleven' )
-		),
-		'hanoi' => array(
-			'url' => '%s/images/headers/hanoi.jpg',
-			'thumbnail_url' => '%s/images/headers/hanoi-thumbnail.jpg',
-			/* translators: header image description */
-			'description' => __( 'Hanoi Plant', 'twentyeleven' )
-		)
-	) );
 }
 endif; // twentyeleven_setup
 
-if ( ! function_exists( 'twentyeleven_header_style' ) ) :
-/**
- * Styles the header image and text displayed on the blog
- *
- * @since Twenty Eleven 1.0
- */
-function twentyeleven_header_style() {
-	$text_color = get_header_textcolor();
-
-	// If no custom options for text are set, let's bail.
-	if ( $text_color == HEADER_TEXTCOLOR )
-		return;
-
-	// If we get this far, we have custom styles. Let's do this.
-	?>
-	<style type="text/css">
-	<?php
-		// Has the text been hidden?
-		if ( 'blank' == $text_color ) :
-	?>
-		#site-title,
-		#site-description {
-			position: absolute !important;
-			clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
-			clip: rect(1px, 1px, 1px, 1px);
-		}
-	<?php
-		// If the user has set a custom color for the text use that
-		else :
-	?>
-		#site-title a,
-		#site-description {
-			color: #<?php echo $text_color; ?> !important;
-		}
-	<?php endif; ?>
-	</style>
-	<?php
-}
-endif; // twentyeleven_header_style
-
-if ( ! function_exists( 'twentyeleven_admin_header_style' ) ) :
-/**
- * Styles the header image displayed on the Appearance > Header admin panel.
- *
- * Referenced via add_theme_support('custom-header') in twentyeleven_setup().
- *
- * @since Twenty Eleven 1.0
- */
-function twentyeleven_admin_header_style() {
-?>
-	<style type="text/css">
-	.appearance_page_custom-header #headimg {
-		border: none;
-	}
-	#headimg h1,
-	#desc {
-		font-family: "Helvetica Neue", Arial, Helvetica, "Nimbus Sans L", sans-serif;
-	}
-	#headimg h1 {
-		margin: 0;
-	}
-	#headimg h1 a {
-		font-size: 32px;
-		line-height: 36px;
-		text-decoration: none;
-	}
-	#desc {
-		font-size: 14px;
-		line-height: 23px;
-		padding: 0 0 3em;
-	}
-	<?php
-		// If the user has set a custom color for the text use that
-		if ( get_header_textcolor() != HEADER_TEXTCOLOR ) :
-	?>
-		#site-title a,
-		#site-description {
-			color: #<?php echo get_header_textcolor(); ?>;
-		}
-	<?php endif; ?>
-	#headimg img {
-		max-width: 1000px;
-		height: auto;
-		width: 100%;
-	}
-	</style>
-<?php
-}
-endif; // twentyeleven_admin_header_style
-
-if ( ! function_exists( 'twentyeleven_admin_header_image' ) ) :
-/**
- * Custom header image markup displayed on the Appearance > Header admin panel.
- *
- * Referenced via add_theme_support('custom-header') in twentyeleven_setup().
- *
- * @since Twenty Eleven 1.0
- */
-function twentyeleven_admin_header_image() { ?>
-	<div id="headimg">
-		<?php
-		$color = get_header_textcolor();
-		$image = get_header_image();
-		if ( $color && $color != 'blank' )
-			$style = ' style="color:#' . $color . '"';
-		else
-			$style = ' style="display:none"';
-		?>
-		<h1><a id="name"<?php echo $style; ?> onclick="return false;" href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php bloginfo( 'name' ); ?></a></h1>
-		<div id="desc"<?php echo $style; ?>><?php bloginfo( 'description' ); ?></div>
-		<?php if ( $image ) : ?>
-			<img src="<?php echo esc_url( $image ); ?>" alt="" />
-		<?php endif; ?>
-	</div>
-<?php }
-endif; // twentyeleven_admin_header_image
 
 /**
  * Sets the post excerpt length to 40 words.
@@ -342,7 +113,7 @@ if ( ! function_exists( 'twentyeleven_continue_reading_link' ) ) :
  * Returns a "Continue Reading" link for excerpts
  */
 function twentyeleven_continue_reading_link() {
-	return ' <a href="'. esc_url( get_permalink() ) . '">' . __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'twentyeleven' ) . '</a>';
+	return ' <a class="read-more" href="'. esc_url( get_permalink() ) . '">' . __( 'READ MORE <span class="meta-nav">&raquo;</span>', 'twentyeleven' ) . '</a>';
 }
 endif; // twentyeleven_continue_reading_link
 
@@ -408,36 +179,6 @@ function twentyeleven_widgets_init() {
 		'before_title' => '<h3 class="widget-title">',
 		'after_title' => '</h3>',
 	) );
-
-	register_sidebar( array(
-		'name' => __( 'Footer Area One', 'twentyeleven' ),
-		'id' => 'sidebar-3',
-		'description' => __( 'An optional widget area for your site footer', 'twentyeleven' ),
-		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-		'after_widget' => "</aside>",
-		'before_title' => '<h3 class="widget-title">',
-		'after_title' => '</h3>',
-	) );
-
-	register_sidebar( array(
-		'name' => __( 'Footer Area Two', 'twentyeleven' ),
-		'id' => 'sidebar-4',
-		'description' => __( 'An optional widget area for your site footer', 'twentyeleven' ),
-		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-		'after_widget' => "</aside>",
-		'before_title' => '<h3 class="widget-title">',
-		'after_title' => '</h3>',
-	) );
-
-	register_sidebar( array(
-		'name' => __( 'Footer Area Three', 'twentyeleven' ),
-		'id' => 'sidebar-5',
-		'description' => __( 'An optional widget area for your site footer', 'twentyeleven' ),
-		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-		'after_widget' => "</aside>",
-		'before_title' => '<h3 class="widget-title">',
-		'after_title' => '</h3>',
-	) );
 }
 add_action( 'widgets_init', 'twentyeleven_widgets_init' );
 
@@ -469,39 +210,6 @@ function twentyeleven_url_grabber() {
 		return false;
 
 	return esc_url_raw( $matches[1] );
-}
-
-/**
- * Count the number of footer sidebars to enable dynamic classes for the footer
- */
-function twentyeleven_footer_sidebar_class() {
-	$count = 0;
-
-	if ( is_active_sidebar( 'sidebar-3' ) )
-		$count++;
-
-	if ( is_active_sidebar( 'sidebar-4' ) )
-		$count++;
-
-	if ( is_active_sidebar( 'sidebar-5' ) )
-		$count++;
-
-	$class = '';
-
-	switch ( $count ) {
-		case '1':
-			$class = 'one';
-			break;
-		case '2':
-			$class = 'two';
-			break;
-		case '3':
-			$class = 'three';
-			break;
-	}
-
-	if ( $class )
-		echo 'class="' . $class . '"';
 }
 
 if ( ! function_exists( 'twentyeleven_comment' ) ) :
@@ -675,3 +383,94 @@ function diww_favicon() {
 }
 add_action('wp_head', 'diww_favicon');
 add_action('admin_head', 'diww_favicon');
+
+function parent_paginate_links( $args = '' ) {
+	$defaults = array(
+		'base' => '%_%', // http://example.com/all_posts.php%_% : %_% is replaced by format (below)
+		'format' => '?page=%#%', // ?page=%#% : %#% is replaced by the page number
+		'total' => 1,
+		'current' => 0,
+		'show_all' => false,
+		'prev_next' => true,
+		'prev_text' => __('NEWER POSTS'),
+		'next_text' => __('<div class="divider"></div>OLDER POSTS'),
+		'end_size' => 1,
+		'mid_size' => 2,
+		'type' => 'plain',
+		'add_args' => false, // array of query args to add
+		'add_fragment' => ''
+	);
+
+	$args = wp_parse_args( $args, $defaults );
+	extract($args, EXTR_SKIP);
+
+	// Who knows what else people pass in $args
+	$total = (int) $total;
+	if ( $total < 2 )
+		return;
+	$current  = (int) $current;
+	$end_size = 0  < (int) $end_size ? (int) $end_size : 1; // Out of bounds?  Make it the default.
+	$mid_size = 0 <= (int) $mid_size ? (int) $mid_size : 2;
+	$add_args = is_array($add_args) ? $add_args : false;
+	$r = '';
+	$page_links = array();
+	$n = 0;
+	$dots = false;
+
+	if ( $prev_next && $current && 1 < $current ) :
+		$link = str_replace('%_%', 2 == $current ? '' : $format, $base);
+		$link = str_replace('%#%', $current - 1, $link);
+		if ( $add_args )
+			$link = add_query_arg( $add_args, $link );
+		$link .= $add_fragment;
+		$page_links[] = '<a class="prev page-numbers" href="' . esc_url( apply_filters( 'paginate_links', $link ) ) . '">' . $prev_text . '</a>';
+	endif;
+	for ( $n = 1; $n <= $total; $n++ ) :
+		$n_display = number_format_i18n($n);
+		if ( $n == $current ) :
+			$page_links[] = "<span class='page-numbers current'>$n_display</span>";
+			$dots = true;
+		else :
+			if ( $show_all || ( $n <= $end_size || ( $current && $n >= $current - $mid_size && $n <= $current + $mid_size ) || $n > $total - $end_size ) ) :
+				$link = str_replace('%_%', 1 == $n ? '' : $format, $base);
+				$link = str_replace('%#%', $n, $link);
+				if ( $add_args )
+					$link = add_query_arg( $add_args, $link );
+				$link .= $add_fragment;
+				$page_links[] = "<a class='page-numbers' href='" . esc_url( apply_filters( 'paginate_links', $link ) ) . "'>$n_display</a>";
+				$dots = true;
+			elseif ( $dots && !$show_all ) :
+				$page_links[] = '<span class="page-numbers dots">' . __( '&hellip;' ) . '</span>';
+				$dots = false;
+			endif;
+		endif;
+	endfor;
+	if ( $prev_next && $current && ( $current < $total || -1 == $total ) ) :
+		$link = str_replace('%_%', $format, $base);
+		$link = str_replace('%#%', $current + 1, $link);
+		if ( $add_args )
+			$link = add_query_arg( $add_args, $link );
+		$link .= $add_fragment;
+		$page_links[] = '<a class="next page-numbers" href="' . esc_url( apply_filters( 'paginate_links', $link ) ) . '">' . $next_text . '</a>';
+	endif;
+	switch ( $type ) :
+		case 'array' :
+			return $page_links;
+			break;
+		case 'list' :
+			$r .= "<ul class='page-numbers'>\n\t<li>";
+			$r .= join("</li>\n\t<li>", $page_links);
+			$r .= "</li>\n</ul>\n";
+			break;
+		default :
+			$r = join("\n", $page_links);
+			break;
+	endswitch;
+	return $r;
+}
+
+if ( function_exists( 'add_image_size' ) ) { 
+	add_image_size( 'category-thumb', 420, 280, true ); //300 pixels wide (and unlimited height)
+	//add_image_size( 'homepage-thumb', 220, 180, true ); //(cropped)
+}
+

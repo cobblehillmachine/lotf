@@ -16,18 +16,33 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {-webkit-appe
 .banner-cont {position:relative; width:1280px; margin:auto;}
 .banner img {float:left; width:100%; height:auto;}
 .container {float:left; width:100%;}
-.white {background:#fff;}
+.white {background:#fff; padding-top:30px;}
 #secondary {float:right; width:240px;}
 .section, article, #respond {float:left; width:688px;}
 input[type="submit"] {color:#fff; background:#3b3937; border:none; width:90px; cursor:pointer;}
 input[type="submit"]:hover {background:#cd5e28;}
 .sep {float:left; width:12px; height:11px; background:url(../images/carrot.jpg) no-repeat; margin:2px 12px 0 12px; background-size:10px;}
 .hidden {display:none;}
+.search .page-title span {color:#3b3937;}
+.search .page-title, #related-cont .relatedthumb:nth-child(4) {margin:0;}
 
-h1, h3, #footer, input, textarea, .post-info, .wp-caption-text, #share-cont span, .signup-title, #comments-title, .post-author, #ns_widget_mailchimp-2 .error, #headline, #searchform label, #header #nav li a {text-transform:uppercase; font-family: 'ProximaNovaExCn-Bold'; font-weight:normal; letter-spacing:1px;}
-h1, .page-title {font-size:37px; margin-bottom:15px; color:#cd5e28;}
+.sticky-cont {float:left; width:100%; padding:40px 0; border-top:1px solid #3b3837;}
+.sticky-cont:first-child {border:none;}
+.sticky-cont .image {float:left; width:198px;}
+.sticky-cont .image img {width:194px; height:124px; border:2px solid #3b3837;}
+.sticky-cont .info-cont {float:right; width:410px; margin-right:45px;}
+.read-more {font-size:15px;}
+.excerpt {float:left; width:100%; margin-top:22px; font-size:17px;}
+#pagination {width:100%; float:left; padding-top:20px; border-top:1px solid #3b3837; color:#3b3937; font:normal 16.5px 'ProximaNovaExCn-Bold'; text-transform:uppercase;}
+#pagination .page-numbers {float:left; color:#3b3937; margin-right:5px;}
+#pagination .divider {float:left; height:25px; width:2px; background:#3b3937; margin:-3px 5px 0 5px;}
+#pagination a:hover, #pagination .current {color:#cd5e28;}
+
+h1, h3, h2, #footer, input, textarea, .post-info, .wp-caption-text, #share-cont span, .signup-title, #comments-title, .post-author, #ns_widget_mailchimp-2 .error, #headline, #searchform label, #header #nav li a, .read-more, .post-title {text-transform:uppercase; font-family: 'ProximaNovaExCn-Bold'; font-weight:normal; letter-spacing:1px;}
+h1, .page-title {font-size:37px; margin-bottom:15px; color:#cd5e28; margin-top:0;}
 h3, .post-title {font-size:22px; color:#cd5e28;}
 .page-title {float:left; width:100%; margin-bottom:22px;}
+h2, #reply-title {font-size:24px; margin-top:0; color:#cd5e28;}
 
 /*FONTS*/
 @import url("//hello.myfonts.net/count/2871a9");  
@@ -40,7 +55,8 @@ h3, .post-title {font-size:22px; color:#cd5e28;}
 #header #logo {position:absolute; background:url(../images/logo.png) no-repeat; width:830px; height:357px; left:-155px; top:24px; z-index:10;}
 #header #logo a {float:left; width:710px; height:246px;}
 #header .header-cont {float:right; width:450px;}
-#header #headline, #header #nav {float:right; text-align:right;}
+#header #headline {float:right; text-align:right;}
+#header #nav {position:absolute; right:0; margin-top:235px; z-index:100;}
 #headline {font-size:25px; color:#cd5e28; margin:60px 0 25px 0;}
 #header #searchform {width:286px; float:right; background:#3b3837; border:2px solid #fff; height:42px; margin-bottom:75px;}
 #header #searchform label {float:left; font-size:15px; color:#fff; margin:13px 6px 0 16px;}
@@ -48,7 +64,7 @@ h3, .post-title {font-size:22px; color:#cd5e28;}
 #header #searchform input[type="submit"] {float:left; width:10px; height:10px; padding:0; background:url(../images/search-arrow.png) no-repeat; margin:16px 0 0 10px;}
 #header #nav li {float:left; margin-left:14px;}
 #header #nav li a {font-size:14.5px; color:#cd5e28; background:url(../images/bullet.png) no-repeat; padding-left:21px;}
-#header #nav li a:hover {color:#807977;}
+#header #nav li a:hover, #header #nav .current-menu-item a {color:#807977;}
 #header #nav li:first-child {margin-left:0;}
 #header #nav li:first-child a {background:none; padding:0;}
 
@@ -66,23 +82,35 @@ h3, .post-title {font-size:22px; color:#cd5e28;}
 #footer #social-cont #instagram:hover {background-position:-80px -23px;}
 
 /*ABOUT*/
-#about-cont {padding:35px 0 75px 0;}
+.wrap {padding:35px 0 75px 0;}
 
 /*SINGLE POST*/
 #comments #author {margin-right:18px;}
 .post-info div {float:left; font-size:18px;}
 .post-info a {color:#3b3837;}
-.entry-content {margin-top:30px;}
+.entry-content {margin:30px 0;}
 .entry-content .wp-caption {width:100% !important;}
 .entry-content img {float:left; width:100%; height:auto;}
 .entry-content .wp-caption-text {float:left; font-size:12px; color:#807977; width:100%; text-align:right; margin:10px 0;}
 #share-cont span {float:left; font-size:20px;}
 #share-cont .sep {background-size:12px; height:14px;}
-#related-cont {padding:40px 20px 40px 60px; width:100%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; float:left; width:100%; background:#ebebeb;}
+#share-cont .share-icon {float:left; width:26px; height:23px; margin-left:30px; background:url(../images/share-icons.png) no-repeat;}
+#share-cont #share-facebook:hover {background-position:0 -23px;}
+#share-cont #share-twitter {background-position:-47px 0;}
+#share-cont #share-twitter:hover {background-position:-47px -23px;}
+#share-cont #share-google {background-position:-103px 0;}
+#share-cont #share-google:hover {background-position:-103px -23px;}
+#related-cont {padding:40px 20px 10px 60px; width:100%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; float:left; width:100%; background:#ebebeb; margin-top:45px;}
+#related-cont .relatedthumb {float:left; width:156px; height:186px; margin-right:40px;}
+#related-cont .relatedthumb:hover img {border-color:#cd5e28;}
+#related-cont .relatedthumb:hover .post-title {color:#3b3837;}
+#related-cont .relatedthumb img {float:left; width:100%; height:106px; border:2px solid #3b3837;}
+#related-cont .post-title {float:left; font-size:15px; margin-top:12px;}
 #comments-title {float:left; width:100%; font-size:15px; color:#afaeae; margin:40px 0 35px 0; padding-top:30px; border-top:1px solid #3b3837;}
 .commentlist li {float:left; width:100%; padding-top:35px; border-top:1px solid #3b3837; margin-bottom:30px;}
 .commentlist li:first-child {border:none; padding:0;}
 .commentlist li .post-author {float:left; width:100%; color:#3b3837; font-size:17px; margin-bottom:18px;}
+#respond {margin-top:30px;}
 
 /*NEWSLETTER SIGNUP*/
 #ns_widget_mailchimp-2 {float:right; background:#3b3837; color:#fff; width:100%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; padding:20px; text-align:center; margin-top:10px;}
@@ -94,10 +122,20 @@ h3, .post-title {font-size:22px; color:#cd5e28;}
 #ns_widget_mailchimp-2 input[type="submit"]:hover {background:#fff; color:#3b3837;}
 #ns_widget_mailchimp-2 .error {font-size:17px; color:#cd5e28;}
 
-
-
-
-
-
+/*CATEGORY*/
+#sticky-post {position:absolute; width:100%;}
+#sticky-post .info-cont {position:absolute; right:140px; margin-top:385px; text-align:right; text-transform:uppercase; font:normal 25px 'ProximaNovaExCn-Bold'; width:505px;}
+#sticky-post .info-cont .category {color:#fff; background:#3b3837; padding:10px 20px; float:right;}
+#sticky-post .info-cont a {float:right; background:#cd5e28; color:#fff; font-size:37.5px; padding:12px 20px 8px 20px;}
+.lotf-post {padding-bottom:40px; background:#fff;}
+.lotf-post:nth-child(2), .lotf-post:nth-child(3) {background:#e7e7e7; float:left; width:100%;}
+.lotf-post:nth-child(2) .post-wrap, .lotf-post:nth-child(3) .post-wrap {width:100%;}
+.lotf-post:nth-child(2) .post-wrap img, .lotf-post:nth-child(3) .post-wrap img {width:420px; height:280px; border:2px solid #3b3837;}
+.lotf-post .post-wrap {width:725px; border-top:1px solid #3b3837; padding-top:40px;}
+.lotf-post:nth-child(2) .post-wrap, .lotf-post:nth-child(4) .post-wrap {border:none;}
+.lotf-post img {width:190px; height:124px; border:2px solid #3b3837; float:left;}
+.lotf-post .post-detail {float:right; width:485px;}
+.lotf-post:nth-child(2) .post-detail, .lotf-post:nth-child(3) .post-detail {width:540px;}
+.lotf-post h3 {margin-top:0;}
 
 

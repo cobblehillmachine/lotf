@@ -8,9 +8,9 @@
  */
 
 get_header(); ?>
-
-		<section id="primary">
-			<div id="content" role="main">
+		<div class="banner-cont"><div class="banner"><img src="<?php echo get_template_directory_uri(); ?>/images/search-banner.jpg"/></div></div>
+		<div class="wrap container white">
+			<div class="mid-cont">
 
 			<?php if ( have_posts() ) : ?>
 
@@ -18,9 +18,9 @@ get_header(); ?>
 					<h1 class="page-title"><?php printf( __( 'Search Results for: %s', 'twentyeleven' ), '<span>' . get_search_query() . '</span>' ); ?></h1>
 				</header>
 
-				<?php twentyeleven_content_nav( 'nav-above' ); ?>
+				
 
-				<?php /* Start the Loop */ ?>
+				<div class="section">
 				<?php while ( have_posts() ) : the_post(); ?>
 
 					<?php
@@ -28,12 +28,27 @@ get_header(); ?>
 						 * If you want to overload this in a child theme then include a file
 						 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
 						 */
-						get_template_part( 'content', get_post_format() );
+						get_template_part( 'content-sticky', get_post_format() );
 					?>
 
 				<?php endwhile; ?>
+				</div>
+				<?php get_sidebar(); ?>
+				<?php global $wp_query;  $total_pages = $wp_query->max_num_pages;  ?>
 
-				<?php twentyeleven_content_nav( 'nav-below' ); ?>
+				<?php	if ($total_pages > 1){  ?>
+					<div id="pagination">
+						<?php  $current_page = max(1, get_query_var('paged'));  
+
+						  echo parent_paginate_links(array(  
+						      'base' => get_pagenum_link(1) . '%_%',  
+						      'format' => '/page/%#%',  
+						      'current' => $current_page,  
+						      'total' => $total_pages,  
+						 ));  ?>
+					</div>
+				<?php	} ?>
+				<!-- <?php //twentyeleven_content_nav( 'nav-below' ); ?> -->
 
 			<?php else : ?>
 
@@ -44,7 +59,7 @@ get_header(); ?>
 
 					<div class="entry-content">
 						<p><?php _e( 'Sorry, but nothing matched your search criteria. Please try again with some different keywords.', 'twentyeleven' ); ?></p>
-						<?php get_search_form(); ?>
+						
 					</div><!-- .entry-content -->
 				</article><!-- #post-0 -->
 
@@ -53,5 +68,4 @@ get_header(); ?>
 			</div><!-- #content -->
 		</section><!-- #primary -->
 
-<?php get_sidebar(); ?>
 <?php get_footer(); ?>

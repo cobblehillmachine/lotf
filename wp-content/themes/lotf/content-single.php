@@ -17,16 +17,9 @@
 					/* translators: used between list items, there is a space after the comma */
 					$categories_list = get_the_category_list( __( ', ', 'twentyeleven' ) );
 
-					/* translators: used between list items, there is a space after the comma */
-					$tag_list = get_the_tag_list( '', __( ', ', 'twentyeleven' ) );
-					if ( '' != $tag_list ) {
-						$utility_text = __( 'This entry was posted in %1$s and tagged %2$s by <a href="%6$s">%5$s</a>. Bookmark the <a href="%3$s" title="Permalink to %4$s" rel="bookmark">permalink</a>.', 'twentyeleven' );
-					} elseif ( '' != $categories_list ) {
+					
 						$utility_text = __( '<div class="post-author">BY %5$s</div> <div class="sep"></div> <div class="post-cat">%1$s</div> <div class="sep"></div> ', 'twentyeleven' );
-					} else {
-						$utility_text = __( 'This entry was posted by <a href="%6$s">%5$s</a>. Bookmark the <a href="%3$s" title="Permalink to %4$s" rel="bookmark">permalink</a>.', 'twentyeleven' );
-					}
-
+				
 					printf(
 						$utility_text,
 						$categories_list,
@@ -49,11 +42,47 @@
 			</div>
 			<div id="share-cont" class="container">
 				<span>share this article</span><div class="sep"></div>
-				<a id="share-facebook" href="#" target="_blank" class="share-icon"></a>
-				<a id="share-twitter" href="#" target="_blank" class="share-icon"></a>
-				<a id="share-google" href="#" target="_blank" class="share-icon"></a>
+				<a id="share-facebook" href="https://www.facebook.com/sharer/sharer.php?u=<?php the_permalink(); ?>" target="_blank" class="share-icon"></a>
+				<a id="share-twitter" href="https://twitter.com/intent/tweet?source=webclient&original_referer=<?php the_permalink(); ?>&text=<?php the_title(); ?>&url=<?php the_permalink(); ?>" target="_blank" class="share-icon"></a>
+				<a id="share-google" href="https://plus.google.com/share?url=<?php the_permalink(); ?>" target="_blank" class="share-icon"></a>
 			</div>
-			<div id="related-cont"></div>
+			 <?php if(has_tag( $tag, $post )) { ?> 
+			<div id="related-cont">
+				<h2>Related articles</h2>  
+				<?php  
+				    $orig_post = $post;  
+				    global $post;  
+				    $tags = wp_get_post_tags($post->ID);  
+
+				    if ($tags) {  
+				    $tag_ids = array();  
+				    foreach($tags as $individual_tag) $tag_ids[] = $individual_tag->term_id;  
+				    $args=array(  
+				    'tag__in' => $tag_ids,  
+				    'post__not_in' => array($post->ID),  
+				    'posts_per_page'=>3, // Number of related posts to display.  
+				    'caller_get_posts'=>1  
+				    );  
+
+				    $my_query = new wp_query( $args );  
+
+				    while( $my_query->have_posts() ) {  
+				    $my_query->the_post();  
+				    ?>  
+
+				    <a href="<? the_permalink()?>" class="relatedthumb">  
+				        <?php the_post_thumbnail('thumbnail'); ?>
+				        <div class="post-title"><?php the_title(); ?>&nbsp;&raquo;</div>  
+				    </a>  
+
+				    <? }  
+				    }  
+				    $post = $orig_post;  
+				    wp_reset_query();  
+				    ?>
+			
+			</div>
+				<?php } ?>
 		</article>
 		<?php get_sidebar(); ?>
 	</div>
