@@ -13,23 +13,12 @@
 		<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 			<h1 class="entry-title"><?php the_title(); ?></h1>
 			<div class="post-info container">
-				<?php
-					/* translators: used between list items, there is a space after the comma */
-					$categories_list = get_the_category_list( __( ', ', 'twentyeleven' ) );
+				<div class="post-author">BY <?php $author = get_the_author(); echo $author; ?> </div>
+				<div class="sep"></div> 
+				<div class="post-cat">
+					<?php foreach((get_the_category()) as $cat) {if (!($cat->cat_ID=='9')) echo '<a href="' . get_bloginfo('url') . '/category/' . $cat->category_nicename . '/">'. $cat->cat_name . '</a>' . ' '; } ?></div> 
+				<div class="sep"></div>
 
-					
-						$utility_text = __( '<div class="post-author">BY %5$s</div> <div class="sep"></div> <div class="post-cat">%1$s</div> <div class="sep"></div> ', 'twentyeleven' );
-				
-					printf(
-						$utility_text,
-						$categories_list,
-						$tag_list,
-						esc_url( get_permalink() ),
-						the_title_attribute( 'echo=0' ),
-						get_the_author(),
-						esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) )
-					);
-				?>
 				<?php if ( 'post' == get_post_type() ) : ?>
 				<div class="post-date">
 					<?php twentyeleven_posted_on(); ?>

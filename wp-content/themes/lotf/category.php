@@ -13,19 +13,19 @@ get_header(); ?>
 
 				<?php /* Start the Loop */ ?>
 				<?php while ( have_posts() ) : the_post(); ?>
-
-					<?php
-						/* Include the Post-Format-specific template for the content.
-						 * If you want to overload this in a child theme then include a file
-						 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-						 */
-						get_template_part( 'content', get_post_format() );
-					?>
-
+					<?php if(is_sticky()) { ?>
+					<?php get_template_part( 'content', get_post_format() ); ?>
+					<?php } ?>
+				<?php endwhile; wp_reset_query(); ?>
+				<?php while ( have_posts() ) : the_post(); ?>
+					<?php if(!is_sticky()) { ?>
+				<?php get_template_part( 'content-category', get_post_format() ); ?>
+					<?php } ?>
 				<?php endwhile; ?>
-				
+				<?php global $wp_query;  $total_pages = $wp_query->max_num_pages;  ?>
 				<?php	if ($total_pages > 1){  ?>
 					<div id="pagination">
+						<div class="mid-cont">
 						<?php  $current_page = max(1, get_query_var('paged'));  
 
 						  echo parent_paginate_links(array(  
@@ -34,9 +34,10 @@ get_header(); ?>
 						      'current' => $current_page,  
 						      'total' => $total_pages,  
 						 ));  ?>
+						</div>
 					</div>
 				<?php	} ?>
-
+				<div class="mid-cont"><?php get_sidebar(); ?></div>
 				<!-- <?php //twentyeleven_content_nav( 'nav-below' ); ?> -->
 
 			<?php else : ?>
