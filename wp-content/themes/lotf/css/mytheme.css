@@ -148,7 +148,7 @@ h2, #reply-title {font-size:24px; margin-top:0; color:#cd5e28;}
 .lotf-post h3 {margin-top:0;}
 
 /*HOMEPAGE*/
-#homepage .banner {position:absolute; width:100%;}
+#homepage .banner {position:absolute; width:100%; display:none;}
 #home-slider {height:730px;}
 #home-slider .banner img {height:530px;}
 #home-slider #thumb-cont {padding:15px 0; margin-top:530px;}
@@ -158,8 +158,9 @@ h2, #reply-title {font-size:24px; margin-top:0; color:#cd5e28;}
 #home-slider #thumb-cont .slide-thumb .title {display:none; position:absolute; text-align:center; width:250px; color:#fff; z-index:100; font-size:24px; }
 #home-slider #thumb-cont .slide-thumb .title .cell {display:table-cell; vertical-align:middle; height:169px; width:250px;}
 #home-slider #thumb-cont .slide-thumb .title .cell span {max-width:210px; display:inline-block;}
-#home-slider #thumb-cont .slide-thumb.current-thumb .overlay, #home-slider #thumb-cont .slide-thumb:hover .title {display:block;}
-#home-slider #thumb-cont .slide-thumb.current-thumb img {border-color:#cd5e28;}
+#home-slider #thumb-cont .slide-thumb.current-thumb .overlay, #home-slider #thumb-cont .slide-thumb:hover .overlay, #home-slider #thumb-cont .slide-thumb:hover .title {display:block;}
+#home-slider #thumb-cont .slide-thumb.current-thumb img, #home-slider #thumb-cont .slide-thumb:hover img {border-color:#cd5e28;}
+#home-slider .banner:hover .title-link {background:#3B3837;}
 
 #home-sticky-cont {}
 .home .section {background:url(../images/fish.png) no-repeat; width:725px;}

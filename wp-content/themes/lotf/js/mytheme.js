@@ -5,44 +5,43 @@ $(document).ready(function() {
 	$('#mailchimpsf_widget-2 label').remove();
 
 	
-	// Rows 2-36 go into the $(document).ready
-	    // Set 'current' and 'current-thumb' classes on page load
-	    $('.banner').first().addClass('current');
-		$('.current').show();
-	    $('.slide-thumb').first().addClass('current-thumb');
+    // Set 'current' and 'current-thumb' classes on page load
+    $('.banner').first().addClass('current');
+	$('.current').show();
+    $('.slide-thumb').first().addClass('current-thumb');
 
-	    // Set interval for slides to transition
-	    var hpSlideInterval;
-	    hpSlideInterval = setInterval(function() {
-	        hpSlideNext();
-	    }, 3000);
+    // Set interval for slides to transition
+    var hpSlideInterval;
+    hpSlideInterval = setInterval(function() {
+        hpSlideNext();
+    }, 3000);
 
-	    // Set mouseenter and mouseleave functions for hovering
-	    //this will pause the slideshow on hover and start it back when the mouse leaves
-	    $('#homepage .banner').mouseenter(function() {
-	        clearInterval(hpSlideInterval);
-	    }).mouseleave(function() {
-	        hpSlideInterval = setInterval(function() {
-	            hpSlideNext();
-	        },  3000);
-	    });
+    // Set mouseenter and mouseleave functions for hovering
+    //this will pause the slideshow on hover and start it back when the mouse leaves
+    $('#homepage .banner').mouseenter(function() {
+        clearInterval(hpSlideInterval);
+    }).mouseleave(function() {
+        hpSlideInterval = setInterval(function() {
+            hpSlideNext();
+        },  3000);
+    });
 
-	    // Click on thumb transitions to that slide
-	    $('.slide-thumb').click(function() {
-	        $('.slide-thumb').removeClass('current-thumb');
-	        $(this).addClass('current-thumb');
-	        var ind = parseInt($(this).attr('thumb')),
-	            currentId = '#slide'+ind;
-	        $('.banner').each(function() {
-	            var slideIndex = parseInt($(this).attr('slide'));
-	            if (slideIndex == ind) {
-	                $('.current').removeClass('current');
-	                $(this).addClass('current');
-	                $('.current').fadeIn(1000);
-	            }
-	        });
-	    });
-	hpSlideNext();
+    // Click on thumb transitions to that slide
+    $('.slide-thumb').click(function() {
+        $('.slide-thumb').removeClass('current-thumb');
+        $(this).addClass('current-thumb');
+        var ind = parseInt($(this).attr('thumb')),
+            currentId = '#slide'+ind;
+        $('.banner').each(function() {
+            var slideIndex = parseInt($(this).attr('slide'));
+            if (slideIndex == ind) {
+                $('.current').removeClass('current');
+                $(this).addClass('current');
+                $('.current').fadeIn(1000);
+            }
+        });
+    });
+
 });
 
 $(window).resize(function() {
@@ -54,9 +53,6 @@ $(window).load(function() {
 		$(this).attr('target', '_blank');
 	});
 });
-
-
-
 
 // Function the interval calls to move the slides
 function hpSlideNext() {
