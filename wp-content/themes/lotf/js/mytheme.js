@@ -4,7 +4,7 @@ $(document).ready(function() {
 	$('#mailchimpsf_widget-2 .widget-title').before('<div class="signup-title">subscribe to our <span>newsletter</span></div>');
 	$('#mailchimpsf_widget-2 label').remove();
 
-	hpSlideNext();
+	
 	// Rows 2-36 go into the $(document).ready
 	    // Set 'current' and 'current-thumb' classes on page load
 	    $('.banner').first().addClass('current');
@@ -42,6 +42,7 @@ $(document).ready(function() {
 	            }
 	        });
 	    });
+	hpSlideNext();
 });
 
 $(window).resize(function() {

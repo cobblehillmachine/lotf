@@ -148,7 +148,7 @@ h2, #reply-title {font-size:24px; margin-top:0; color:#cd5e28;}
 .lotf-post h3 {margin-top:0;}
 
 /*HOMEPAGE*/
-#homepage .banner {position:absolute;}
+#homepage .banner {position:absolute; width:100%;}
 #home-slider {height:730px;}
 #home-slider .banner img {height:530px;}
 #home-slider #thumb-cont {padding:15px 0; margin-top:530px;}
