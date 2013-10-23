@@ -2,10 +2,10 @@
 <div id="home-slider" class="container">
 		
 		<div class="banner-cont">
-			<?php $count = 1; ?>
+			<?php $count = 0; ?>
 			<?php global $post; $myposts = get_posts('numberposts=4&category=9');
 			 foreach($myposts as $post) { ?>
-				<a id="slide<?php echo $count;?>" class="banner" href="<?php the_permalink(); ?>">
+				<a id="slide<?php echo $count;?>" class="banner" href="<?php the_permalink(); ?>" slide="<?php echo $count;?>">
 					<?php the_post_thumbnail('full'); ?>
 					<div class="info-cont">
 						<div class="category">featured</div>
@@ -19,10 +19,10 @@
 		</div>
 		<div class="mid-cont">
 				<div id="thumb-cont" class="container">
-					<?php $i = 1; ?>
+					<?php $i = 0; ?>
 					<?php global $post; $myposts = get_posts('numberposts=4&category=9');
 					 foreach($myposts as $post) { ?>
-						<div class="slide-thumb slide<?php echo $i;?>">
+						<div class="slide-thumb slide<?php echo $i;?>" thumb="<?php echo $i;?>">
 							<div class="overlay"></div>
 							<div class="title"><div class="cell"><span><?php the_title(); ?></span></div></div>
 							<?php the_post_thumbnail('category-thumb'); ?>
@@ -30,7 +30,6 @@
 						<?php $i++; ?>
 					<?php } ?>
 				</div>
-			
 			
 		</div>
 	
@@ -54,7 +53,20 @@
 	<div class="line"></div>
 	<div class="mid-cont">
 		<div class="feed-title">@ LOTF on INSTAGRAM</div>
-		<?php echo do_shortcode('[simply_instagram endpoints="users" type="recent-media" size="standard_resolution" display="5"]'); ?>
+		<div id="instafeed"></div>
 	</div>
 </div>
 <?php get_footer(); ?>
+
+<script type="text/javascript">
+
+		   var userFeed = new Instafeed({
+		        get: 'user',
+		        userId: 220440851,
+		        accessToken: '220440851.6a21cfe.f563f019756a45d88db13e623c930efd',
+				resolution: 'low_resolution',
+				limit: 4
+		    });
+		    userFeed.run();
+ 
+</script>

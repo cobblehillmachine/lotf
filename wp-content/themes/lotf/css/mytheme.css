@@ -156,8 +156,8 @@ h2, #reply-title {font-size:24px; margin-top:0; color:#cd5e28;}
 #home-slider #thumb-cont .slide-thumb .title {display:none; position:absolute; text-align:center; width:250px; color:#fff; z-index:100; font-size:24px; }
 #home-slider #thumb-cont .slide-thumb .title .cell {display:table-cell; vertical-align:middle; height:169px; width:250px;}
 #home-slider #thumb-cont .slide-thumb .title .cell span {max-width:210px; display:inline-block;}
-/*#home-slider #thumb-cont .slide-thumb:hover .overlay, #home-slider #thumb-cont .slide-thumb:hover .title {display:block;}
-#home-slider #thumb-cont .slide-thumb:hover img {border-color:#cd5e28;}*/
+#home-slider #thumb-cont .slide-thumb.current-thumb .overlay, #home-slider #thumb-cont .slide-thumb:hover .title {display:block;}
+#home-slider #thumb-cont .slide-thumb.current-thumb img {border-color:#cd5e28;}
 #slide2, #slide3, #slide4 {display:none;}
 
 #home-sticky-cont {}
@@ -166,11 +166,9 @@ h2, #reply-title {font-size:24px; margin-top:0; color:#cd5e28;}
 #instagram-cont {background:#3b3837; padding:45px 0 30px 0;}
 #instagram-cont .line {width:100%; height:3px; background:#fff; float:left; margin-bottom:32px;}
 #instagram-cont .feed-title {font-size:37px; color:#fff; padding:0 20px; position:absolute; margin-left:320px; top:-20px; background:#3b3837;}
-#instagram-cont .masonryItem, #instagram-cont .masonryItem hr {box-shadow:none; width:150px; height:150px; border:none; background:transparent; margin:0 25px 0 25px !important;}
-#instagram-cont .masonryItem:last-child {margin-right:0 !important; top:0 !important; left:800px !important;}
-#instagram-cont #masonryContainer {margin:0; padding:0; border-radius:0; height:150px !important;}
-#instagram-cont .masonryItem img {width:150px; height:150px; margin:0;}
-
+#instagram-cont #instafeed a {width:230px; height:230px; margin-right:25px; float:left;}
+#instagram-cont #instafeed a img {width:100%; height:100%;}
+#instagram-cont #instafeed a:last-child {margin-right:0;}
 
 
 
