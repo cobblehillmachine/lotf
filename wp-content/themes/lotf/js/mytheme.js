@@ -26,21 +26,25 @@ $(document).ready(function() {
         },  3000);
     });
 
-    // Click on thumb transitions to that slide
-    $('.slide-thumb').click(function() {
-        $('.slide-thumb').removeClass('current-thumb');
-        $(this).addClass('current-thumb');
-        var ind = parseInt($(this).attr('thumb')),
-            currentId = '#slide'+ind;
-        $('.banner').each(function() {
-            var slideIndex = parseInt($(this).attr('slide'));
-            if (slideIndex == ind) {
-                $('.current').removeClass('current');
-                $(this).addClass('current');
-                $('.current').fadeIn(1000);
-            }
-        });
-    });
+	// Click on thumb transitions to that slide
+	$('.slide-thumb').click(function() {
+		clearInterval(hpSlideInterval);
+		$('.slide-thumb').removeClass('current-thumb');
+		$(this).addClass('current-thumb');
+		var ind = parseInt($(this).attr('thumb')),
+		currentId = '#slide'+ind;
+		$('.banner').each(function() {
+			var slideIndex = parseInt($(this).attr('slide'));
+			if (slideIndex == ind) {
+		$('.current').removeClass('current');
+		$(this).addClass('current');
+		$('.current').fadeIn(1000);
+		}
+		});
+		hpSlideInterval = setInterval(function() {
+		hpSlideNext();
+		}, 3000);
+	});
 
 });
 
