@@ -29,23 +29,23 @@ $(document).ready(function() {
 	// Click on thumb transitions to that slide
 	// Click on thumb transitions to that slide
 	$('.slide-thumb').click(function() {
-	clearInterval(hpSlideInterval);
-	$('.slide-thumb').removeClass('current-thumb');
-	$(this).addClass('current-thumb');
-	var ind = parseInt($(this).attr('thumb')),
-	currentId = '#slide'+ind;
-	$('.banner').each(function() {
-	var slideIndex = parseInt($(this).attr('slide'));
-	if (slideIndex == ind) {
-	$('.banner').removeClass('current');
-	$('.banner').fadeOut();
-	$(this).addClass('current');
-	$('.current').fadeIn(1000);
-	}
-	});
-	hpSlideInterval = setInterval(function() {
-	hpSlideNext();
-	}, 3000);
+		clearInterval(hpSlideInterval);
+		$('.slide-thumb').removeClass('current-thumb');
+		$(this).addClass('current-thumb');
+		var ind = parseInt($(this).attr('thumb')),
+		currentId = '#slide'+ind;
+		$('.banner').each(function() {
+			var slideIndex = parseInt($(this).attr('slide'));
+			if (slideIndex == ind) {
+				$('.banner').removeClass('current');
+				$('.banner').fadeOut();
+				$(this).addClass('current');
+				$('.current').fadeIn(1000);
+			}
+		});
+		hpSlideInterval = setInterval(function() {
+			hpSlideNext();
+			}, 3000);
 	});
 
 });

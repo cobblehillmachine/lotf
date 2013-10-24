@@ -423,7 +423,7 @@ function parent_paginate_links( $args = '' ) {
 		if ( $add_args )
 			$link = add_query_arg( $add_args, $link );
 		$link .= $add_fragment;
-		$page_links[] = '<a class="prev page-numbers" href="' . esc_url( apply_filters( 'paginate_links', $link ) ) . '">' . $prev_text . '</a>';
+		$page_links[] = '<a class="prev page-numbers" href="' . esc_url( apply_filters( 'paginate_links', $link ) ) . '">' . $prev_text . '</a><div class="divider"></div>';
 	endif;
 	for ( $n = 1; $n <= $total; $n++ ) :
 		$n_display = number_format_i18n($n);
