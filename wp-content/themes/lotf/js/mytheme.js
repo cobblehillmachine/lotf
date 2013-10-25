@@ -47,6 +47,7 @@ $(document).ready(function() {
 			hpSlideNext();
 			}, 3000);
 	});
+	 checkVersion();
 
 });
 
@@ -102,3 +103,26 @@ function setInputFieldFunctions(){
 	         .blur(function(){$this.attr('placeholder', $this.data('placeholder'));});
 	});
 }
+
+function getIEVersion() {
+     var rv = -1; // Return value assumes failure.
+     if (navigator.appName == 'Microsoft Internet Explorer') {
+         var ua = navigator.userAgent;
+         var re  = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+         if (re.test(ua) != null)
+             rv = parseFloat( RegExp.$1 );
+     }
+     return rv;
+ }
+
+
+ function checkVersion() {
+     var ver = getIEVersion();
+
+     if ( ver != -1 ) {
+         if (ver <= 9.0) {
+             $('.category .container').css({'background': '#fff'});
+         }
+     }
+ }
+
