@@ -190,10 +190,9 @@ function twentyeleven_content_nav( $html_id ) {
 	global $wp_query;
 
 	if ( $wp_query->max_num_pages > 1 ) : ?>
-		<nav id="<?php echo esc_attr( $html_id ); ?>">
-			<h3 class="assistive-text"><?php _e( 'Post navigation', 'twentyeleven' ); ?></h3>
-			<div class="nav-previous"><?php next_posts_link( __( '<span class="meta-nav">&larr;</span> Older posts', 'twentyeleven' ) ); ?></div>
-			<div class="nav-next"><?php previous_posts_link( __( 'Newer posts <span class="meta-nav">&rarr;</span>', 'twentyeleven' ) ); ?></div>
+		<nav id="pagination">
+			<div class="prev page-numbers"><?php next_posts_link( __( 'Older posts', 'twentyeleven' ) ); ?></div>
+			<div class="next page-numbers"><?php previous_posts_link( __( 'Newer posts', 'twentyeleven' ) ); ?>
 		</nav><!-- #nav-above -->
 	<?php endif;
 }
@@ -474,3 +473,17 @@ if ( function_exists( 'add_image_size' ) ) {
 	//add_image_size( 'homepage-thumb', 220, 180, true ); //(cropped)
 }
 
+if ( ! function_exists( 'my_pagination' ) ) :
+	function my_pagination() {
+		global $wp_query;
+
+		$big = 999999999; // need an unlikely integer
+		
+		echo parent_paginate_links( array(
+			'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+			'format' => '?paged=%#%',
+			'current' => max( 1, get_query_var('paged') ),
+			'total' => $wp_query->max_num_pages
+		) );
+	}
+endif;
