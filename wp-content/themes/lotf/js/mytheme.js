@@ -121,7 +121,8 @@ function getIEVersion() {
 
      if ( ver != -1 ) {
          if (ver <= 9.0) {
-             $('.category .container').css({'background': '#fff'});
+             $('.lotf-post:nth-child(2), .lotf-post:nth-child(3)').css({'background': '#e7e7e7', 'float':'left', 'width':100 +'%'});
+			 $('.lotf-post, .paged .lotf-post:nth-child(2), .paged .lotf-post:nth-child(3)').css({'background':'#fff', 'padding-bottom': 40 +'px'});
          }
      }
  }
