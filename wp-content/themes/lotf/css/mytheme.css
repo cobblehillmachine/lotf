@@ -30,6 +30,7 @@ input[type="submit"]:hover {background:#cd5e28;}
 .sticky-cont:first-child {border:none;}
 .sticky-cont .image {float:left; width:198px;}
 .sticky-cont .image img {width:194px; height:124px; border:2px solid #3b3837;}
+.sticky-cont .image img:hover, .lotf-post img:hover, .paged .lotf-post:nth-child(2) img:hover, .paged .lotf-post:nth-child(3) img:hover {border-color:#cd5e28 !important;}
 .sticky-cont .info-sticky {float:right; width:410px; margin-right:45px;}
 .sticky-cont .sticky-cat {float:left; width:100%; margin-bottom:4px; font-size:15px; color:#3b3937;}
 .read-more {font-size:15px; width:100%; float:left; margin-top:5px;}
@@ -62,7 +63,7 @@ h2, #reply-title {font-size:24px; margin-top:0; color:#cd5e28;}
 #headline {font-size:25px; color:#cd5e28; margin:60px 0 25px 0;}
 #header #searchform {width:286px; float:right; background:#3b3837; border:2px solid #fff; height:42px; margin-bottom:75px;}
 #header #searchform label {float:left; font-size:15px; color:#fff; margin:13px 6px 0 16px;}
-#header #searchform input[type="text"] {float:left; border:none; border-bottom:1px solid #fff; background:transparent; width:180px; margin-bottom:0; padding:0; margin-top:8px;}
+#header #searchform input[type="text"] {float:left; border:none; border-bottom:1px solid #fff; background:transparent; width:185px; margin-bottom:0; padding:0; margin-top:8px;}
 #header #searchform input[type="submit"] {float:left; width:10px; height:10px; padding:0; background:url(../images/search-arrow.png) no-repeat; margin:16px 0 0 10px;}
 #header #nav li {float:left; margin-left:14px;}
 #header #nav li a {font-size:14.5px; color:#cd5e28; background:url(../images/bullet.png) no-repeat; padding-left:21px;}
@@ -149,6 +150,7 @@ h2, #reply-title {font-size:24px; margin-top:0; color:#cd5e28;}
 .lotf-post h3 {margin-top:0;}
 .category .AdWidget_ImageWidget {display:none;}
 .paged #header {height:415px;}
+.paged .lotf-post .post-wrap:first-child {border-top:none;}
 
 
 /*HOMEPAGE*/
