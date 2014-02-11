@@ -75,9 +75,11 @@
 </head>
 
 <body <?php body_class(); ?> id="<?php echo  strtolower(str_replace(' ','-',get_the_title())); ?>">
-		<!-- <div id="header-top" class="container">
-			<div class="mid-cont"></div>
-		</div> -->
+		<div id="header-top" class="container">
+			<div class="mid-cont">
+				<?php dynamic_sidebar( 'sidebar-2' ); ?>
+			</div>
+		</div>
 		<div id="header" class="container">
 			<div class="mid-cont">
 				<div id="logo"><a  href="/"></a></div>

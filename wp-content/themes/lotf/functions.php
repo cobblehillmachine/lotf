@@ -171,7 +171,7 @@ function twentyeleven_widgets_init() {
 	) );
 
 	register_sidebar( array(
-		'name' => __( 'Showcase Sidebar', 'twentyeleven' ),
+		'name' => __( 'Top Banner Ad', 'twentyeleven' ),
 		'id' => 'sidebar-2',
 		'description' => __( 'The sidebar for the optional Showcase Template', 'twentyeleven' ),
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',

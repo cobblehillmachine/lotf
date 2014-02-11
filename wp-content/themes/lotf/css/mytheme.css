@@ -53,7 +53,8 @@ h2, #reply-title {font-size:24px; margin-top:0; color:#cd5e28;}
 @font-face {font-family: 'ProximaNovaExCn-Bold';src: url('../fonts/proxima.eot');src: url('../fonts/proxima.eot?#iefix') format('embedded-opentype'),url('../fonts/proxima.woff') format('woff'),url('../fonts/proxima.ttf') format('truetype');}
 
 /*HEADER*/
-#header-top {height:115px;}
+#header-top {height:115px; text-align:center;}
+#header-top aside {display:inline-block; margin-top:10px;}
 #header {height:270px; background:#1d1d1d;}
 #header #logo {position:absolute; background:url(../images/logo.png) no-repeat; width:830px; height:357px; left:-155px; top:24px; z-index:10;}
 #header #logo a {float:left; width:710px; height:246px;}
